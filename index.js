@@ -22,7 +22,13 @@ const connectMongo=require('connect-mongo')
 const connecctFlash=require('connect-flash')
 const edge=require('edge.js')
 const LogoutController=require('./controller/logout')
-mongoose.connect(process.env.DB_URI)
+const mongoUri = `mongodb://node-js-blog-app:${process.env.pass}@${process.env.host}:${process.env.por}/${process.env.databaseName}?ssl=true`;
+console.log('DB url: '+mongoUri)
+mongoose.connect(mongoUri,{ useNewUrlParser: true , useUnifiedTopology: true })
+// var mongoClient = require("mongoose").MongoClient;
+// mongoClient.connect(mongoUri, function (err, db) {
+//   db.close();
+// });
 
 const validateCreatePostMiddleware= require('./middleware/storePost')
 const auth=require('./middleware/auth')
